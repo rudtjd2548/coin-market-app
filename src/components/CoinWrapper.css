@@ -3,6 +3,23 @@
   width: 60%;
 }
 
+.Price {
+  width: 80px;
+  text-align: right;
+}
+
+.PlusFluctateRate {
+  color: blue;
+  width: 85px;
+  text-align: right;
+}
+
+.MinusFluctateRate {
+  color: red;
+  width: 85px;
+  text-align: right;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .DataTable {
     width: 80%;

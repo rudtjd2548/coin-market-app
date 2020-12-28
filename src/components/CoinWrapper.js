@@ -58,10 +58,11 @@ class CoinWrapper extends Component {
 
     return (
       <DataTable
-        title="Bithumb market price"
+        title="빗썸 마켓 가격정보(Made by Evan Jin)"
         className='DataTable'
         columns={columns}
         data={data}
+        highlightOnHover
       />
     )
   }
