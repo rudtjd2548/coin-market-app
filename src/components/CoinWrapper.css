@@ -3,6 +3,11 @@
   width: 60%;
 }
 
+.COS_name_Column {
+  color: red;
+  font-weight: bold;
+}
+
 .Price {
   width: 80px;
   text-align: right;

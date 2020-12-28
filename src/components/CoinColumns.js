@@ -12,11 +12,18 @@ const columns = [
       function getKeyByValue(object, row) {
         return object[row]
       }
-      return (
-        <div>
-          {getKeyByValue(coinNameKR.bithumb, row.key)}
-        </div>
-      )
+
+      return row.key === 'COS'
+        ? (
+          <div className='COS_name_Column'>
+            {getKeyByValue(coinNameKR.bithumb, row.key)}★
+          </div>
+        )
+        : (
+          <div>
+            {getKeyByValue(coinNameKR.bithumb, row.key)}
+          </div>
+        )
     }
   },
   {
