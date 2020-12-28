@@ -3,7 +3,6 @@ import axios from 'axios'
 import DataTable from 'react-data-table-component'
 
 import { columns } from './CoinColumns'
-import { addComma } from '../utils/addComma'
 
 import './CoinWrapper.css'
 
@@ -38,9 +37,9 @@ class CoinWrapper extends Component {
       for (let [key, value] of Object.entries(res.data.data)) {
         chartData.push({
           key: key,
-          Price: `${addComma(value.closing_price)}원`,
-          FluctateRate: `${value['fluctate_rate_24H']}`,
-          FluctateRate24: `${value['fluctate_24H']}`
+          Price: Number(value.closing_price),
+          FluctateRate: Number(value['fluctate_rate_24H']),
+          FluctateRate24: Number(value['fluctate_24H'])
         })
       }
 

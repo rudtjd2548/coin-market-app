@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#src
+/src/components/DogContainer.css
+/src/components/DogContainer.js

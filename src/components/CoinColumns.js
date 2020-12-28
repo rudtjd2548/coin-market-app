@@ -1,12 +1,13 @@
 import React from 'react'
 import { coinNameKR } from './CoinName'
+import { addComma } from '../utils/addComma'
 
 const columns = [
   {
     name: '코인명',
     selector: 'key',
     sortable: true,
-    width: '20%',
+    width: '30%',
     cell: row => {
       function getKeyByValue(object, row) {
         return object[row]
@@ -20,13 +21,18 @@ const columns = [
     name: '현재가',
     selector: 'Price',
     sortable: true,
-    width: '20%'
+    width: '30%',
+    cell: row => {
+      return (
+        <div>{addComma(row.Price)}원</div>
+      )
+    }
   },
   {
     name: '24시간 변동률',
     selector: 'FluctateRate',
     sortable: true,
-    width: '20%',
+    width: '30%',
     cell: row => {
       if (row.FluctateRate < 0) {
         return (
