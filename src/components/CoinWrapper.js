@@ -1,0 +1,71 @@
+import React, { Component } from 'react'
+import axios from 'axios'
+import DataTable from 'react-data-table-component'
+
+import { columns } from './CoinColumns'
+import { addComma } from '../utils/addComma'
+
+import './CoinWrapper.css'
+
+class CoinWrapper extends Component {
+  state = {
+    status: 'Loading...',
+    data: []
+  }
+
+  componentDidMount() {
+    this.getCoinData()
+
+    this.interval = setInterval(() => {
+      this.getCoinData()
+    }, 5000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  async getCoinData() {
+    let chartData = []
+
+    const res = await axios.get(
+      'https://api.bithumb.com/public/ticker/all'
+    )
+
+    if (res.data.status === '0000') {
+      delete res.data.data['date'];
+
+      for (let [key, value] of Object.entries(res.data.data)) {
+        chartData.push({
+          key: key,
+          Price: `${addComma(value.closing_price)}원`,
+          FluctateRate: `${value['fluctate_rate_24H']}`,
+          FluctateRate24: `${value['fluctate_24H']}`
+        })
+      }
+
+      this.setState({
+        status: 'successed',
+        data: chartData
+      })
+    } else {
+      this.setState({
+        status: 'failed'
+      })
+    }
+  }
+  render() {
+    const { data } = this.state
+
+    return (
+      <DataTable
+        title="Bithumb market price"
+        className='DataTable'
+        columns={columns}
+        data={data}
+      />
+    )
+  }
+}
+
+export default CoinWrapper
