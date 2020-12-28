@@ -16,15 +16,15 @@ class CoinWrapper extends Component {
   componentDidMount() {
     this.getCoinData()
 
-    this.getCoinCandlestick()
-    //this.interval = setInterval(() => {
-    //  this.getCoinData()
-    //}, 5000)
+    //this.getCoinCandlestick()
+    this.interval = setInterval(() => {
+      this.getCoinData()
+    }, 5000)
   }
 
-  //componentWillUnmount() {
-  //  clearInterval(this.interval);
-  //}
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
   async getCoinCandlestick() {
 
