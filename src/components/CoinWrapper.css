@@ -25,6 +25,15 @@
   text-align: right;
 }
 
+.ExpandedComponent {
+  background-color: #f9f9f9;
+  font-size: 13px;
+  height: 270px;
+  padding: 30px;
+  text-align: left;
+  vertical-align: middle;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .DataTable {
     width: 80%;

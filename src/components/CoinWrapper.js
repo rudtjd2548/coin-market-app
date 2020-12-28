@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import DataTable from 'react-data-table-component'
+import ExpandedComponent from './ExpandedComponent'
 
 import { columns } from './CoinColumns'
 
@@ -15,13 +16,31 @@ class CoinWrapper extends Component {
   componentDidMount() {
     this.getCoinData()
 
-    this.interval = setInterval(() => {
-      this.getCoinData()
-    }, 5000)
+    this.getCoinCandlestick()
+    //this.interval = setInterval(() => {
+    //  this.getCoinData()
+    //}, 5000)
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
+  //componentWillUnmount() {
+  //  clearInterval(this.interval);
+  //}
+
+  async getCoinCandlestick() {
+
+    const res = await axios.get(
+      'https://api.bithumb.com/public/candlestick/COS_KRW/1h'
+    )
+
+    console.log(res)
+
+    if (res.data.status === '0000') {
+
+    } else {
+      this.setState({
+        status: 'failed'
+      })
+    }
   }
 
   async getCoinData() {
@@ -63,6 +82,8 @@ class CoinWrapper extends Component {
         columns={columns}
         data={data}
         highlightOnHover
+        expandableRows
+        expandableRowsComponent={<ExpandedComponent />}
       />
     )
   }
