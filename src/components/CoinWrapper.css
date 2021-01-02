@@ -13,14 +13,20 @@
   text-align: right;
 }
 
-.PlusFluctateRate {
+.MinusFluctateRate {
   color: blue;
   width: 85px;
   text-align: right;
 }
 
-.MinusFluctateRate {
+.PlusFluctateRate {
   color: red;
+  width: 85px;
+  text-align: right;
+}
+
+.SmallPrice {
+  font-size: 11px;
   width: 85px;
   text-align: right;
 }
@@ -28,8 +34,7 @@
 .ExpandedComponent {
   background-color: #f9f9f9;
   font-size: 13px;
-  height: 270px;
-  padding: 30px;
+  height: 400px;
   text-align: left;
   vertical-align: middle;
 }

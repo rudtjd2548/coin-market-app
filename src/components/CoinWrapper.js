@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import DataTable from 'react-data-table-component'
-import ExpandedComponent from './ExpandedComponent'
+
 
 import { columns } from './CoinColumns'
 
@@ -16,35 +16,17 @@ class CoinWrapper extends Component {
   componentDidMount() {
     this.getCoinData()
 
-    //this.getCoinCandlestick()
     this.interval = setInterval(() => {
       this.getCoinData()
-    }, 5000)
+    }, 1000)
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  async getCoinCandlestick() {
-
-    const res = await axios.get(
-      'https://api.bithumb.com/public/candlestick/COS_KRW/1h'
-    )
-
-    console.log(res)
-
-    if (res.data.status === '0000') {
-
-    } else {
-      this.setState({
-        status: 'failed'
-      })
-    }
-  }
-
   async getCoinData() {
-    let chartData = []
+    let changedData = []
 
     const res = await axios.get(
       'https://api.bithumb.com/public/ticker/all'
@@ -54,17 +36,19 @@ class CoinWrapper extends Component {
       delete res.data.data['date'];
 
       for (let [key, value] of Object.entries(res.data.data)) {
-        chartData.push({
+        changedData.push({
           key: key,
           Price: Number(value.closing_price),
           FluctateRate: Number(value['fluctate_rate_24H']),
-          FluctateRate24: Number(value['fluctate_24H'])
+          FluctateRate24: Number(value['fluctate_24H']),
+          FluctatePriceToday: Number((Number(value['closing_price']) - Number(value['prev_closing_price'])).toFixed(5)),
+          FluctateRateToday: Number(((Number(value['closing_price']) - Number(value['prev_closing_price'])) / Number(value['opening_price']) * 100).toFixed(2))
         })
       }
 
       this.setState({
         status: 'successed',
-        data: chartData
+        data: changedData
       })
     } else {
       this.setState({
@@ -82,8 +66,6 @@ class CoinWrapper extends Component {
         columns={columns}
         data={data}
         highlightOnHover
-        expandableRows
-        expandableRowsComponent={<ExpandedComponent />}
       />
     )
   }

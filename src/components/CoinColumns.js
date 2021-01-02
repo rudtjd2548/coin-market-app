@@ -40,20 +40,60 @@ const columns = [
     }
   },
   {
-    name: '24시간 변동률',
+    name: '24h 변동률',
+    maxWidth: '150px',
     selector: 'FluctateRate',
     sortable: true,
     cell: row => {
       if (row.FluctateRate < 0) {
         return (
-          <div className='PlusFluctateRate'>
-            {row.FluctateRate24} 원<br />({row.FluctateRate} %)
+          <div className='MinusFluctateRate'>
+            {row.FluctateRate} %
+            <div className='SmallPrice'>{row.FluctateRate24}</div>
           </div>
         )
       } else if (row.FluctateRate > 0) {
         return (
+          <div className='PlusFluctateRate'>
+            +{row.FluctateRate} %
+            <div className='SmallPrice'>+{row.FluctateRate24}</div>
+          </div>
+        )
+      } else if (row.FluctateRate === 0) {
+        return (
+          <div style={{ textAlign: "right" }}>
+            0.00 %
+            <div className='SmallPrice'>0</div>
+          </div>
+        )
+      }
+    }
+  },
+  {
+    name: '당일 변동률',
+    maxWidth: '150px',
+    selector: 'FluctateRateToday',
+    sortable: true,
+    cell: row => {
+      if (row.FluctateRateToday < 0) {
+        return (
           <div className='MinusFluctateRate'>
-            +{row.FluctateRate24} 원<br />(+{row.FluctateRate} %)
+            {row.FluctateRateToday} %
+            <div className='SmallPrice'>{row.FluctatePriceToday}</div>
+          </div>
+        )
+      } else if (row.FluctateRateToday > 0) {
+        return (
+          <div className='PlusFluctateRate'>
+            +{row.FluctateRateToday} %
+            <div className='SmallPrice'>+{row.FluctatePriceToday}</div>
+          </div>
+        )
+      } else if (row.FluctateRateToday === 0) {
+        return (
+          <div style={{ textAlign: "right" }}>
+            0.00 %
+            <div className='SmallPrice'>0</div>
           </div>
         )
       }
