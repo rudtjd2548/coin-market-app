@@ -39,8 +39,9 @@ class CoinWrapper extends Component {
         changedData.push({
           key: key,
           Price: Number(value.closing_price),
-          FluctateRate: Number(value['fluctate_rate_24H']),
-          FluctateRate24: Number(value['fluctate_24H']),
+          MarketCap: Math.floor(value.acc_trade_value_24H / 1000000),
+          //FluctateRate: Number(value['fluctate_rate_24H']),
+          //FluctateRate24: Number(value['fluctate_24H']),
           FluctatePriceToday: Number((Number(value['closing_price']) - Number(value['prev_closing_price'])).toFixed(5)),
           FluctateRateToday: Number(((Number(value['closing_price']) - Number(value['prev_closing_price'])) / Number(value['opening_price']) * 100).toFixed(2))
         })
@@ -61,11 +62,12 @@ class CoinWrapper extends Component {
 
     return (
       <DataTable
-        title="빗썸 마켓 가격정보(Made by Evan Jin)"
+        title="빗썸 마켓 가격정보(Made by Evan)"
         className='DataTable'
         columns={columns}
         data={data}
         highlightOnHover
+        responsive={true}
       />
     )
   }

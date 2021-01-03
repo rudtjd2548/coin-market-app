@@ -1,6 +1,23 @@
-.DataTable {
+.rdt_TableHeader div {
+  padding-top: 50px;
+  display: block;
   margin: 0 auto;
-  width: 60%;
+  width: 100%;
+}
+
+.DataTable {
+  max-width: 50%;
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  text-align: left;
+}
+
+.KeyName {
+  color: #aeaeae;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 400;
 }
 
 .COS_name_Column {
@@ -9,6 +26,11 @@
 }
 
 .Price {
+  width: 80px;
+  text-align: right;
+}
+
+.MarketCap {
   width: 80px;
   text-align: right;
 }
@@ -41,7 +63,7 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .DataTable {
-    width: 80%;
+    max-width: 80%;
   }
 }
 
@@ -52,7 +74,7 @@
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .DataTable {
-    width: 80%;
+    max-width: 80%;
   }
 }
 
@@ -63,7 +85,7 @@
 
 @media (min-width: 481px) and (max-width: 767px) {
   .DataTable {
-    width: 80%;
+    max-width: 100%;
   }
 }
 
@@ -73,7 +95,23 @@
 */
 
 @media (min-width: 320px) and (max-width: 480px) {
+  .Title {
+    font-size: 20px;
+  }
   .DataTable {
-    width: 100%;
+    max-width: 100%;
+  }
+  .DataTable div {
+    font-size: 10px;
+  }
+  .PlusFluctateRate {
+    width: 70px;
+  }
+  .MinusFluctateRate {
+    width: 70px;
+  }
+  .SmallPrice {
+    font-size: 6px;
+    width: 70px;
   }
 }
