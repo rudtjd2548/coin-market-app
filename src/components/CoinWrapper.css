@@ -8,7 +8,7 @@
 
 .DataTable {
   box-sizing: border-box;
-  max-width: 50%;
+  max-width: 30%;
   height: 100%;
   margin: 0 auto;
   overflow-x: hidden;
@@ -71,6 +71,12 @@
   text-align: left;
   vertical-align: middle;
   box-sizing: border-box;
+}
+
+@media (min-width: 1024px) and (max-width: 1920px) {
+  .DataTable {
+    max-width: 50%;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {

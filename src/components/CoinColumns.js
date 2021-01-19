@@ -31,7 +31,7 @@ const columns = [
   {
     name: '현재가',
     maxWidth: '210px',
-    width: '24%',
+    width: '26%',
     selector: 'Price',
     sortable: true,
     cell: row => {
