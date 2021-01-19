@@ -1,31 +1,26 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import DataTable from 'react-data-table-component'
-
 
 import { columns } from './CoinColumns'
 
 import './CoinWrapper.css'
+import ExpandedComponent from './ExpandedComponent';
 
-class CoinWrapper extends Component {
-  state = {
-    status: 'Loading...',
-    data: []
-  }
+function CoinWrapper() {
+  const [data, setData] = useState([])
 
-  componentDidMount() {
-    this.getCoinData()
+  useEffect(() => {
+    getCoinData()
 
-    this.interval = setInterval(() => {
-      this.getCoinData()
-    }, 1000)
-  }
+    const interval = setInterval(() => {
+      getCoinData()
+    }, 5000)
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+    return () => clearInterval(interval)
+  }, [])
 
-  async getCoinData() {
+  async function getCoinData() {
     let changedData = []
 
     const res = await axios.get(
@@ -40,37 +35,29 @@ class CoinWrapper extends Component {
           key: key,
           Price: Number(value.closing_price),
           MarketCap: Math.floor(value.acc_trade_value_24H / 1000000),
-          //FluctateRate: Number(value['fluctate_rate_24H']),
-          //FluctateRate24: Number(value['fluctate_24H']),
           FluctatePriceToday: Number((Number(value['closing_price']) - Number(value['prev_closing_price'])).toFixed(5)),
           FluctateRateToday: Number(((Number(value['closing_price']) - Number(value['prev_closing_price'])) / Number(value['opening_price']) * 100).toFixed(2))
         })
       }
-
-      this.setState({
-        status: 'successed',
-        data: changedData
-      })
-    } else {
-      this.setState({
-        status: 'failed'
-      })
+      setData(changedData)
     }
   }
-  render() {
-    const { data } = this.state
+  return (
+    <DataTable
+      title="빗썸 마켓 가격정보(Made by Evan)"
+      className='DataTable'
+      columns={columns}
+      data={data}
+      highlightOnHover
+      responsive={true}
+      expandableRows
+      expandableRowsComponent={
+        <ExpandedComponent
 
-    return (
-      <DataTable
-        title="빗썸 마켓 가격정보(Made by Evan)"
-        className='DataTable'
-        columns={columns}
-        data={data}
-        highlightOnHover
-        responsive={true}
-      />
-    )
-  }
+        />
+      }
+    />
+  )
 }
 
 export default CoinWrapper

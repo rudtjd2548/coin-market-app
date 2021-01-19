@@ -6,7 +6,7 @@ const columns = [
   {
     name: '코인명',
     maxWidth: '210px',
-    width: '25%',
+    width: '20%',
     selector: 'key',
     sortable: true,
     cell: row => {
@@ -107,7 +107,7 @@ const columns = [
   {
     name: '거래금액(백만원)',
     maxWidth: '210px',
-    width: '35%',
+    width: '18%',
     selector: 'MarketCap',
     sortable: true,
     cell: row => {
