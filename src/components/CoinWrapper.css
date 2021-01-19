@@ -33,7 +33,8 @@
 }
 
 .MarketCap {
-  width: 80px;
+  border: 1px solid red;
+  width: 55px;
   text-align: right;
 }
 
