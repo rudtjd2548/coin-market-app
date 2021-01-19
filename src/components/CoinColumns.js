@@ -107,7 +107,7 @@ const columns = [
   {
     name: '거래금액(백만원)',
     maxWidth: '210px',
-    width: '18%',
+    width: '19%',
     selector: 'MarketCap',
     sortable: true,
     cell: row => {

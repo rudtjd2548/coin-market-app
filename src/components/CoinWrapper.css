@@ -39,20 +39,20 @@
 
 .MinusFluctateRate {
   color: blue;
-  width: 55px;
+  width: 65px;
   margin: 0 auto;
   text-align: right;
 }
 
 .PlusFluctateRate {
   color: red;
-  width: 55px;
+  width: 65px;
   margin: 0 auto;
   text-align: right;
 }
 
 .ZeroFluctateRate {
-  width: 55px;
+  width: 65px;
   margin: 0 auto;
   text-align: right;
 }
