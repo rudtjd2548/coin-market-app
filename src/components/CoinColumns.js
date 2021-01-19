@@ -31,7 +31,7 @@ const columns = [
   {
     name: '현재가',
     maxWidth: '210px',
-    width: '20%',
+    width: '24%',
     selector: 'Price',
     sortable: true,
     cell: row => {
@@ -76,7 +76,7 @@ const columns = [
   {
     name: '당일 변동률',
     maxWidth: '150px',
-    width: '25%',
+    width: '20%',
     selector: 'FluctateRateToday',
     sortable: true,
     cell: row => {
@@ -96,7 +96,7 @@ const columns = [
         )
       } else if (row.FluctateRateToday === 0) {
         return (
-          <div style={{ textAlign: "right" }}>
+          <div className='ZeroFluctateRate'>
             0.00 %
             <div className='SmallPrice'>0</div>
           </div>
