@@ -15,7 +15,7 @@ const CoinWrapper = () => {
 
     const interval = setInterval(() => {
       getCoinData()
-    }, 5000)
+    }, 1000000)
 
     return () => clearInterval(interval)
   }, [])
@@ -39,9 +39,11 @@ const CoinWrapper = () => {
           FluctateRateToday: Number(((Number(value['closing_price']) - Number(value['prev_closing_price'])) / Number(value['opening_price']) * 100).toFixed(2))
         })
       }
+      console.log('coinWrapper getCoinData()')
       setData(changedData)
     }
   }
+  console.log('coinWrapper updated')
   return (
     <DataTable
       title="빗썸 마켓 가격정보(Made by Evan)"
