@@ -1,6 +1,6 @@
 import React from 'react'
 import { coinNameKR } from './CoinName'
-import { addComma } from '../utils/addComma'
+import { addComma } from '../utils/utils'
 
 const columns = [
   {

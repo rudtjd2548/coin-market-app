@@ -1,5 +1,3 @@
-/* Price Comma Function */
-
 export function addComma(obj) {
   var regx = new RegExp(/(-?\d+)(\d{3})/);
   var bExists = obj.toString().indexOf(".", 0);//0번째부터 .을 찾는다.
@@ -15,4 +13,28 @@ export function addComma(obj) {
     obj = strArr[0];
   }
   return obj;//문자열 반환
+}
+
+export function formatDate(date) {
+  var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return { year, month, day }
+}
+
+var SI_SYMBOL = ["", "k", "M", "G", "T", "P", "E"];
+
+export function abbreviateNumber(number) {
+  var tier = Math.log10(Math.abs(number)) / 3 | 0;
+  if (tier === 0) return number;
+  var suffix = SI_SYMBOL[tier];
+  var scale = Math.pow(10, tier * 3);
+  var scaled = number / scale;
+  return scaled.toFixed(1) + suffix;
 }

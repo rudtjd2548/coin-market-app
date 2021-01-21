@@ -3,6 +3,10 @@
   height: 350px;
 }
 
+.checkboxWrapper {
+  margin-left: 16px;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
   .Chart {
     height: 300px;

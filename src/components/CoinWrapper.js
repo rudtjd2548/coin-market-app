@@ -7,7 +7,7 @@ import { columns } from './CoinColumns'
 import './CoinWrapper.css'
 import ExpandedComponent from './ExpandedComponent';
 
-function CoinWrapper() {
+const CoinWrapper = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -52,9 +52,7 @@ function CoinWrapper() {
       responsive={true}
       expandableRows
       expandableRowsComponent={
-        <ExpandedComponent
-
-        />
+        <ExpandedComponent />
       }
     />
   )

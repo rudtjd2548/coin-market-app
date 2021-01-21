@@ -3,18 +3,19 @@ import axios from 'axios'
 import { createChart, CrosshairMode } from 'lightweight-charts'
 
 import './ExpandedComponent.css'
-import { formatDate } from './../utils/dateFormat'
-import { abbreviateNumber } from './../utils/prefixNumber'
+import { formatDate, abbreviateNumber } from './../utils/utils'
+import { currencyAPI } from './../utils/APIkey'
 
-let candleSeries//, volumeSeries
+let candleSeriesBN, candleSeriesBT, volumnSeriesBN, volumnSeriesBT
 
-function ExpandedComponent2(props) {
-  const [data, setData] = useState([])
+function ExpandedComponent(props) {
+  const [bithumbData, setBithumbData] = useState([])
+  const [binanceData, setBinanceData] = useState([])
+  const [toggleBN, setToggleBN] = useState(true)
   const chartContainerRef = useRef()
   const chart = useRef()
 
   useEffect(() => {
-    getCoinData(setData)
     chart.current = createChart(chartContainerRef.current, {
       width: chartContainerRef.current.clientWidth,
       height: chartContainerRef.current.clientHeight,
@@ -22,42 +23,133 @@ function ExpandedComponent2(props) {
         mode: CrosshairMode.Normal,
       }
     })
-    candleSeries = chart.current.addCandlestickSeries()
-    candleSeries.applyOptions({
+    candleSeriesBN = chart.current.addCandlestickSeries()
+    candleSeriesBN.applyOptions({
       priceFormat: {
         type: 'custom',
         formatter: price => abbreviateNumber(price.toFixed(4)),
       },
     })
-    //volumeSeries = chart.current.addHistogramSeries()
+
+    candleSeriesBT = chart.current.addCandlestickSeries({
+      upColor: '#d23c4b',
+      downColor: '#1e5fd2',
+      borderUpColor: '#d23c4b',
+      borderDownColor: '#1e5fd2',
+      wickUpColor: '#d23c4b',
+      wickDownColor: '#1e5fd2',
+    })
+    candleSeriesBT.applyOptions({
+      priceFormat: {
+        type: 'custom',
+        formatter: price => abbreviateNumber(price.toFixed(4)),
+      },
+    })
+
+    volumnSeriesBN = chart.current.addHistogramSeries({
+      color: '#f0b90b',
+      priceFormat: {
+        type: 'volume',
+      },
+      priceScaleId: '',
+      scaleMargins: {
+        top: 0.8,
+        bottom: 0.02,
+      },
+    })
+    volumnSeriesBT = chart.current.addHistogramSeries({
+      color: '#24292e',
+      priceFormat: {
+        type: 'volume',
+      },
+      priceScaleId: '',
+      scaleMargins: {
+        top: 0.8,
+        bottom: 0.02,
+      },
+    })
   }, [])
 
-  useEffect(() => {
-    candleSeries.setData(data)
-    //volumeSeries.setData(data)
-  }, [data])
+  useEffect(() => { // binance api
+    const getBinanceData = async () => {
+      let formatedData = []
+      let date = new Date()
+      let today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
 
-  async function getCoinData() {
-    let changedData = []
-    const res = await axios.get(`https://api.bithumb.com/public/candlestick/${props.data.key}_KRW/24h`)
-
-    if (res.data.status === '0000') {
-      for (let value of Object.values(res.data.data)) {
-        changedData.push({
+      const res = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${props.data.key}USDT&interval=1d`)
+      const res2 = await axios.get(`https://free.currconv.com/api/v7/convert?q=USD_KRW,KRW_USD&compact=ultra&date=${today}&apiKey=${currencyAPI}`)
+      const todayUSDtoKRW = Object.values(res2.data.USD_KRW).toString()
+      if (res.status !== 200) console.log('failed to fetch Binance API')
+      for (let value of Object.values(res.data)) {
+        formatedData.push({
           time: formatDate(value[0]),
           value: +value[5],
-          open: +value[1],
-          high: +value[3],
-          low: +value[4],
-          close: +value[2]
+          open: +value[1] * todayUSDtoKRW,
+          high: +value[2] * todayUSDtoKRW,
+          low: +value[3] * todayUSDtoKRW,
+          close: +value[4] * todayUSDtoKRW
         })
       }
-      setData(changedData)
+      setBinanceData(formatedData)
     }
-  }
+    getBinanceData()
+  }, [props.data.key])
+
+  useEffect(() => { // bithumb data
+    const getBithumbData = async () => {
+      let changedData = []
+      const res = await axios.get(`https://api.bithumb.com/public/candlestick/${props.data.key}_KRW/24h`)
+
+      if (res.data.status === '0000') {
+        for (let value of Object.values(res.data.data)) {
+          changedData.push({
+            time: formatDate(value[0]),
+            value: +value[5],
+            open: +value[1],
+            high: +value[3],
+            low: +value[4],
+            close: +value[2]
+          })
+        }
+        setBithumbData(changedData)
+      }
+    }
+    getBithumbData(setBithumbData)
+  }, [props.data.key])
+
+  useEffect(() => {
+    candleSeriesBT.setData(bithumbData)
+    volumnSeriesBT.setData(bithumbData)
+    if (toggleBN) {
+      candleSeriesBN.setData(binanceData)
+      volumnSeriesBN.setData(binanceData)
+    } else {
+      candleSeriesBN.setData([])
+      volumnSeriesBN.setData([])
+    }
+  }, [binanceData, bithumbData, toggleBN])
+
   return (
-    <div className='Chart' ref={chartContainerRef} />
+    <>
+      <div className='checkboxWrapper'>
+        <label htmlFor='Binance'>Bithumb</label>
+        <input
+          type='checkbox'
+          id='Bithumb'
+          checked='checked'
+          readOnly
+          disabled
+        />
+        <label htmlFor='Binance'>Binance</label>
+        <input
+          type='checkbox'
+          id='Binance'
+          checked={toggleBN ? "checked" : ""}
+          onChange={() => setToggleBN(!toggleBN)} />
+      </div>
+      <div className='Chart' ref={chartContainerRef} />
+    </>
   )
 }
 
-export default ExpandedComponent2
+export default ExpandedComponent
