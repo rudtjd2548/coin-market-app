@@ -4,7 +4,6 @@ import { createChart, CrosshairMode } from 'lightweight-charts'
 
 import './ExpandedComponent.css'
 import { formatDate, abbreviateNumber } from './../utils/utils'
-import { currencyAPI } from './../utils/APIkey'
 
 let candleSeriesBN, candleSeriesBT, volumnSeriesBN, volumnSeriesBT
 
@@ -77,7 +76,7 @@ function ExpandedComponent(props) {
       let today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
 
       const res = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${props.data.key}USDT&interval=1d`)
-      const res2 = await axios.get(`https://free.currconv.com/api/v7/convert?q=USD_KRW,KRW_USD&compact=ultra&date=${today}&apiKey=${currencyAPI}`)
+      const res2 = await axios.get(`https://free.currconv.com/api/v7/convert?q=USD_KRW,KRW_USD&compact=ultra&date=${today}&apiKey=${process.env.REACT_APP_CURRENCY_API_KEY}`)
       const todayUSDtoKRW = Object.values(res2.data.USD_KRW).toString()
       if (res.status !== 200) console.log('failed to fetch Binance API')
       for (let value of Object.values(res.data)) {
