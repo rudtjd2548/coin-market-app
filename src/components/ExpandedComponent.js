@@ -4,6 +4,7 @@ import { createChart, CrosshairMode } from 'lightweight-charts'
 
 import './ExpandedComponent.css'
 import { formatDate, abbreviateNumber } from './../utils/utils'
+import { coinNameV2 } from './CoinName'
 
 let candleSeriesBN, candleSeriesBT, volumnSeriesBN, volumnSeriesBT
 
@@ -74,8 +75,7 @@ function ExpandedComponent(props) {
       let formatedData = []
       let date = new Date()
       let today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-
-      const res = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${props.data.key}USDT&interval=1d`)
+      const res = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${props.data.key}${coinNameV2[props.data.i]['BN']}&interval=1d`)
       const res2 = await axios.get(`https://free.currconv.com/api/v7/convert?q=USD_KRW,KRW_USD&compact=ultra&date=${today}&apiKey=${process.env.REACT_APP_CURRENCY_API_KEY}`)
       const todayUSDtoKRW = Object.values(res2.data.USD_KRW).toString()
       if (res.status !== 200) console.log('failed to fetch Binance API')
@@ -92,7 +92,7 @@ function ExpandedComponent(props) {
       setBinanceData(formatedData)
     }
     getBinanceData()
-  }, [props.data.key])
+  }, [props.data.key, props.data.i])
 
   useEffect(() => { // bithumb data
     const getBithumbData = async () => {
@@ -144,7 +144,7 @@ function ExpandedComponent(props) {
           type='checkbox'
           id='Binance'
           checked={toggleBN ? "checked" : ""}
-          onChange={() => setToggleBN(!toggleBN)} />
+          onChange={() => setToggleBN(!toggleBN)} />{(coinNameV2[props.data.i]['BN']) ? coinNameV2[props.data.i]['BN'] : ''}
       </div>
       <div className='Chart' ref={chartContainerRef} />
     </>

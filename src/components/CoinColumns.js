@@ -1,6 +1,10 @@
 import React from 'react'
-import { coinNameKR } from './CoinName'
+import { /*coinNameKR,*/ coinNameV2 } from './CoinName'
 import { addComma } from '../utils/utils'
+
+//function getKeyByValue(object, row) {
+//  return object[row]
+//}
 
 const columns = [
   {
@@ -10,20 +14,24 @@ const columns = [
     selector: 'key',
     sortable: true,
     cell: row => {
-      function getKeyByValue(object, row) {
-        return object[row]
-      }
-
       return row.key === 'COS'
         ? (
           <div className='COS_name_Column'>
-            {getKeyByValue(coinNameKR.bithumb, row.key)}★
+            콘텐토스&#128192;
           </div>
         )
         : (
           <div>
-            {getKeyByValue(coinNameKR.bithumb, row.key)}
-            <div className='KeyName'>{row.key}/KRW</div>
+            {coinNameV2[row.i][row.key]}
+            {
+              coinNameV2[row.i]['BN'] === 'USDT' ? <span>&#128192;</span> :
+                coinNameV2[row.i]['BN'] === 'BIDR' ||
+                  coinNameV2[row.i]['BN'] === 'BUSD' ||
+                  coinNameV2[row.i]['BN'] === 'BIDR' ||
+                  coinNameV2[row.i]['BN'] === 'TRX' ||
+                  coinNameV2[row.i]['BN'] === 'BTC' ? <span>&#128191;</span> : ''
+            }
+            <div className='KeyName'>{row.key}/{coinNameV2[row.i]['BN'] ? coinNameV2[row.i]['BN'] : 'KRW'}</div>
           </div>
         )
     }

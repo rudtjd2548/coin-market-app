@@ -26,3 +26,5 @@ yarn-error.log*
 /src/components/DogContainer.css
 /src/components/DogContainer.js
 /src/utils/APIkey.js
+.env.development
+.env.production
