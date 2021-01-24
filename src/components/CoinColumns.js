@@ -27,7 +27,7 @@ const columns = [
               coinNameV2[row.i]['BN'] === 'USDT' ? <span>&#128192;</span> :
                 coinNameV2[row.i]['BN'] === 'BIDR' ||
                   coinNameV2[row.i]['BN'] === 'BUSD' ||
-                  coinNameV2[row.i]['BN'] === 'BIDR' ||
+                  coinNameV2[row.i]['BN'] === 'ETH' ||
                   coinNameV2[row.i]['BN'] === 'TRX' ||
                   coinNameV2[row.i]['BN'] === 'BTC' ? <span>&#128191;</span> : ''
             }
