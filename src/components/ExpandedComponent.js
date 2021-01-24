@@ -12,6 +12,7 @@ function ExpandedComponent(props) {
   const [bithumbData, setBithumbData] = useState([])
   const [binanceData, setBinanceData] = useState([])
   const [toggleBN, setToggleBN] = useState(true)
+  const [toggleBT, setToggleBT] = useState(true)
   const chartContainerRef = useRef()
   const chart = useRef()
 
@@ -117,16 +118,29 @@ function ExpandedComponent(props) {
   }, [props.data.key])
 
   useEffect(() => {
-    candleSeriesBT.setData(bithumbData)
-    volumnSeriesBT.setData(bithumbData)
-    if (toggleBN) {
-      candleSeriesBN.setData(binanceData)
-      volumnSeriesBN.setData(binanceData)
-    } else {
+    if (toggleBT && !toggleBN) {
+      candleSeriesBT.setData(bithumbData)
+      volumnSeriesBT.setData(bithumbData)
       candleSeriesBN.setData([])
       volumnSeriesBN.setData([])
     }
-  }, [binanceData, bithumbData, toggleBN])
+    else if (!toggleBT && toggleBN) {
+      candleSeriesBT.setData([])
+      volumnSeriesBT.setData([])
+      candleSeriesBN.setData(binanceData)
+      volumnSeriesBN.setData(binanceData)
+    } else if (toggleBT && toggleBN) {
+      candleSeriesBT.setData(bithumbData)
+      volumnSeriesBT.setData(bithumbData)
+      candleSeriesBN.setData(binanceData)
+      volumnSeriesBN.setData(binanceData)
+    } else {
+      candleSeriesBT.setData([])
+      volumnSeriesBT.setData([])
+      candleSeriesBN.setData([])
+      volumnSeriesBN.setData([])
+    }
+  }, [binanceData, bithumbData, toggleBN, toggleBT])
 
   return (
     <>
@@ -135,16 +149,15 @@ function ExpandedComponent(props) {
         <input
           type='checkbox'
           id='Bithumb'
-          checked='checked'
-          readOnly
-          disabled
+          checked={toggleBT ? "checked" : ""}
+          onChange={() => setToggleBT(!toggleBT)}
         />
-        <label htmlFor='Binance'>Binance</label>
+        <label htmlFor='Binance'>Binance({(coinNameV2[props.data.i]['BN']) ? coinNameV2[props.data.i]['BN'] : ''})</label>
         <input
           type='checkbox'
           id='Binance'
           checked={toggleBN ? "checked" : ""}
-          onChange={() => setToggleBN(!toggleBN)} />{(coinNameV2[props.data.i]['BN']) ? coinNameV2[props.data.i]['BN'] : ''}
+          onChange={() => setToggleBN(!toggleBN)} />
       </div>
       <div className='Chart' ref={chartContainerRef} />
     </>
