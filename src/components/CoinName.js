@@ -186,7 +186,6 @@ const coinNameV2 = [
   { BZNT: '베잔트', BT: true, BN: false },
   { HDAC: '에이치닥', BT: true, BN: false },
   { NPXS: '펀디엑스', BT: true, BN: 'USDT' },
-  { LBA: '크레드', BT: true, BN: false },
   { WET: '위쇼토큰', BT: true, BN: false },
   { AMO: '아모코인', BT: true, BN: false },
   { BSV: '비트코인에스브이', BT: true, BN: false },

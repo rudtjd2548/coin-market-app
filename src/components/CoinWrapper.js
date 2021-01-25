@@ -40,6 +40,7 @@ const CoinWrapper = () => {
         })
         index += 1
       }
+      console.log(changedData)
       //console.log('coinWrapper getCoinData()')
       setData(changedData)
     }
