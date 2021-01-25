@@ -15,7 +15,7 @@ const CoinWrapper = () => {
 
     const interval = setInterval(() => {
       getCoinData()
-    }, 600000)
+    }, 60000)
 
     return () => clearInterval(interval)
   }, [])
@@ -40,7 +40,7 @@ const CoinWrapper = () => {
         })
         index += 1
       }
-      console.log(changedData)
+      //console.log(changedData)
       //console.log('coinWrapper getCoinData()')
       setData(changedData)
     }
