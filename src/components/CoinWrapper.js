@@ -6,27 +6,31 @@ import { columns } from './CoinColumns'
 
 import './CoinWrapper.css'
 import ExpandedComponent from './ExpandedComponent';
+import TimerComponent from './TimerComponent'
+
+const DATATABLE_TIMER = 10
 
 const CoinWrapper = () => {
   const [data, setData] = useState([])
+  const [tableTimer, setTableTimer] = useState(DATATABLE_TIMER)
 
   useEffect(() => {
     getCoinData()
 
     const interval = setInterval(() => {
       getCoinData()
-    }, 60000)
+    }, DATATABLE_TIMER * 1000)
 
     return () => clearInterval(interval)
   }, [])
 
-  async function getCoinData() {
+  const getCoinData = async () => {
     let changedData = []
     let index = 0
     const res = await axios.get(
       'https://api.bithumb.com/public/ticker/all'
     )
-
+    setTableTimer(DATATABLE_TIMER)
     if (res.data.status === '0000') {
       delete res.data.data['date'];
       for (let [key, value] of Object.entries(res.data.data)) {
@@ -47,18 +51,26 @@ const CoinWrapper = () => {
   }
   //console.log('coinWrapper updated')
   return (
-    <DataTable
-      title="빗썸 마켓 가격정보(Made by Evan)"
-      className='DataTable'
-      columns={columns}
-      data={data}
-      highlightOnHover
-      responsive={true}
-      expandableRows
-      expandableRowsComponent={
-        <ExpandedComponent />
-      }
-    />
+    <>
+      <div className="timer_wrapper">
+        <TimerComponent
+          info='Table'
+          seconds={tableTimer}
+        />
+      </div>
+      <DataTable
+        title="빗썸 마켓 가격정보(Made by Evan)"
+        className='DataTable'
+        columns={columns}
+        data={data}
+        highlightOnHover
+        responsive={true}
+        expandableRows
+        expandableRowsComponent={
+          <ExpandedComponent />
+        }
+      />
+    </>
   )
 }
 

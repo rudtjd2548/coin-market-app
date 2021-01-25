@@ -1,3 +1,11 @@
+.timer_wrapper {
+  box-sizing: border-box;
+  max-width: 50%;
+  margin: 0 auto;
+  text-align: left;
+  overflow-x: hidden;
+}
+
 .rdt_TableHeader div {
   box-sizing: border-box;
   padding-top: 50px;
@@ -77,10 +85,16 @@
   .DataTable {
     max-width: 50%;
   }
+  .timer_wrapper {
+    max-width: 50%;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .DataTable {
+    max-width: 80%;
+  }
+  .timer_wrapper {
     max-width: 80%;
   }
 }
@@ -94,6 +108,9 @@
   .DataTable {
     max-width: 80%;
   }
+  .timer_wrapper {
+    max-width: 80%;
+  }
 }
 
 /*
@@ -105,6 +122,10 @@
   .DataTable {
     max-width: 100%;
   }
+  .timer_wrapper {
+    max-width: 100%;
+    padding-left: 10px;
+  }
 }
 
 /*
@@ -113,6 +134,10 @@
 */
 
 @media (min-width: 320px) and (max-width: 480px) {
+  .timer_wrapper {
+    max-width: 100%;
+    padding-left: 10px;
+  }
   .Title {
     font-size: 20px;
   }

@@ -7,8 +7,9 @@ import { formatDate, abbreviateNumber } from './../utils/utils'
 import { coinNameV2 } from './CoinName'
 
 let candleSeriesBN, candleSeriesBT, volumnSeriesBN, volumnSeriesBT
+let todayUSDtoKRW = 1100
 
-function ExpandedComponent(props) {
+const ExpandedComponent = (props) => {
   const [bithumbData, setBithumbData] = useState([])
   const [binanceData, setBinanceData] = useState([])
   const [toggleBN, setToggleBN] = useState(true)
@@ -71,28 +72,38 @@ function ExpandedComponent(props) {
     })
   }, [])
 
-  useEffect(() => { // binance api
-    const getBinanceData = async () => {
-      let formatedData = []
-      let date = new Date()
-      let today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-      const res = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${props.data.key}${coinNameV2[props.data.i]['BN']}&interval=1d`)
+  useEffect(() => { // https://www.currencyconverterapi.com/
+    //console.log('calling currencyconverterapi API')
+    let date = new Date()
+    let today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+    const getCurrencyData = async () => {
       const res2 = await axios.get(`https://free.currconv.com/api/v7/convert?q=USD_KRW,KRW_USD&compact=ultra&date=${today}&apiKey=${process.env.REACT_APP_CURRENCY_API_KEY}`)
-      const todayUSDtoKRW = Object.values(res2.data.USD_KRW).toString()
-      if (res.status !== 200) console.log('failed to fetch Binance API')
-      for (let value of Object.values(res.data)) {
-        formatedData.push({
-          time: formatDate(value[0]),
-          value: +value[5],
-          open: +value[1] * todayUSDtoKRW,
-          high: +value[2] * todayUSDtoKRW,
-          low: +value[3] * todayUSDtoKRW,
-          close: +value[4] * todayUSDtoKRW
-        })
-      }
-      setBinanceData(formatedData)
+      if (res2.status === 200) todayUSDtoKRW = Object.values(res2.data.USD_KRW).toString()
     }
-    getBinanceData()
+    getCurrencyData()
+  }, [])
+
+  useEffect(() => { // binance api
+    if (coinNameV2[props.data.i]['BN']) {
+      //console.log('calling binace API')
+      const getBinanceData = async () => {
+        let formatedData = []
+        const res = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${props.data.key}${coinNameV2[props.data.i]['BN']}&interval=1d`)
+        if (res.status !== 200) console.log('failed to fetch Binance API')
+        for (let value of Object.values(res.data)) {
+          formatedData.push({
+            time: formatDate(value[0]),
+            value: +value[5],
+            open: +value[1] * todayUSDtoKRW,
+            high: +value[2] * todayUSDtoKRW,
+            low: +value[3] * todayUSDtoKRW,
+            close: +value[4] * todayUSDtoKRW
+          })
+        }
+        setBinanceData(formatedData)
+      }
+      getBinanceData()
+    }
   }, [props.data.key, props.data.i])
 
   useEffect(() => { // bithumb data
@@ -142,6 +153,7 @@ function ExpandedComponent(props) {
     }
   }, [binanceData, bithumbData, toggleBN, toggleBT])
 
+  //console.log('ExpendedComponent updated')
   return (
     <>
       <div className='checkboxWrapper'>
@@ -154,17 +166,16 @@ function ExpandedComponent(props) {
         />
         {
           coinNameV2[props.data.i]['BN'] ? (
-            <>
+            <span>
               <label htmlFor='Binance'>Binance({coinNameV2[props.data.i]['BN']})</label>
               <input
                 type='checkbox'
                 id='Binance'
                 checked={toggleBN ? "checked" : ""}
                 onChange={() => setToggleBN(!toggleBN)} />
-            </>
+            </span>
           ) : ""
         }
-
       </div>
       <div className='Chart' ref={chartContainerRef} />
     </>

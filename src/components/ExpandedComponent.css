@@ -3,6 +3,10 @@
   height: 350px;
 }
 
+.timer_wrapper2 {
+  float: right;
+}
+
 .checkboxWrapper {
   margin-left: 16px;
 }

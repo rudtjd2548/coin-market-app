@@ -31,7 +31,7 @@ const columns = [
                   coinNameV2[row.i]['BN'] === 'TRX' ||
                   coinNameV2[row.i]['BN'] === 'BTC' ? <span style={{ backgroundColor: "#757575" }}>&nbsp;&nbsp;</span> : ''
             }
-            <div className='KeyName'>{row.key}/{coinNameV2[row.i]['BN']}</div>
+            <div className='KeyName'>{row.key}/{coinNameV2[row.i]['BN'] ? coinNameV2[row.i]['BN'] : "KRW"}</div>
           </div>
         )
     }
