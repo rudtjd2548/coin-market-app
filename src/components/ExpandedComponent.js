@@ -152,12 +152,19 @@ function ExpandedComponent(props) {
           checked={toggleBT ? "checked" : ""}
           onChange={() => setToggleBT(!toggleBT)}
         />
-        <label htmlFor='Binance'>Binance({(coinNameV2[props.data.i]['BN']) ? coinNameV2[props.data.i]['BN'] : ''})</label>
-        <input
-          type='checkbox'
-          id='Binance'
-          checked={toggleBN ? "checked" : ""}
-          onChange={() => setToggleBN(!toggleBN)} />
+        {
+          coinNameV2[props.data.i]['BN'] ? (
+            <>
+              <label htmlFor='Binance'>Binance({coinNameV2[props.data.i]['BN']})</label>
+              <input
+                type='checkbox'
+                id='Binance'
+                checked={toggleBN ? "checked" : ""}
+                onChange={() => setToggleBN(!toggleBN)} />
+            </>
+          ) : ""
+        }
+
       </div>
       <div className='Chart' ref={chartContainerRef} />
     </>

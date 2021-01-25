@@ -24,14 +24,14 @@ const columns = [
           <div>
             {coinNameV2[row.i][row.key]}
             {
-              coinNameV2[row.i]['BN'] === 'USDT' ? <span>&#128192;</span> :
+              coinNameV2[row.i]['BN'] === 'USDT' ? <span style={{ backgroundColor: "#F0E68C" }}>&nbsp;&nbsp;</span> :
                 coinNameV2[row.i]['BN'] === 'BIDR' ||
                   coinNameV2[row.i]['BN'] === 'BUSD' ||
                   coinNameV2[row.i]['BN'] === 'ETH' ||
                   coinNameV2[row.i]['BN'] === 'TRX' ||
-                  coinNameV2[row.i]['BN'] === 'BTC' ? <span>&#128191;</span> : ''
+                  coinNameV2[row.i]['BN'] === 'BTC' ? <span style={{ backgroundColor: "#757575" }}>&nbsp;&nbsp;</span> : ''
             }
-            <div className='KeyName'>{row.key}/{coinNameV2[row.i]['BN'] ? coinNameV2[row.i]['BN'] : 'KRW'}</div>
+            <div className='KeyName'>{row.key}/{coinNameV2[row.i]['BN']}</div>
           </div>
         )
     }
