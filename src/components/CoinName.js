@@ -250,6 +250,7 @@ const coinNameV2 = [
   { ADP: '어댑터 토큰', BT: true, BN: false },
   { MIR: '미러 프로토콜', BT: true, BN: false },
   { WOZX: '이포스', BT: true, BN: false },
+  { ANV: '애니버스', BT: true, BN: false },
   { XNO: '제노토큰', BT: true, BN: false },
   { BCD: '비트코인 다이아몬드', BT: true, BN: 'BTC' },
   { XLM: '스텔라루멘', BT: true, BN: 'USDT' },
