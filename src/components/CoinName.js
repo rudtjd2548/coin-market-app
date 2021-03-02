@@ -253,6 +253,7 @@ const coinNameV2 = [
   { ANV: '애니버스', BT: true, BN: false },
   { GRT: '더그래프', BT: true, BN: 'USDT' },
   { XNO: '제노토큰', BT: true, BN: false },
+  { LINO: '리니어파이낸스', BT: true, BN: false },
   { BCD: '비트코인 다이아몬드', BT: true, BN: 'BTC' },
   { XLM: '스텔라루멘', BT: true, BN: 'USDT' },
   { PIVX: '피벡스', BT: true, BN: 'ETH' },
