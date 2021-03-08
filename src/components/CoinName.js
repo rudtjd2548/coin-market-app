@@ -253,6 +253,7 @@ const coinNameV2 = [
   { WOZX: '이포스', BT: true, BN: false },
   { ANV: '애니버스', BT: true, BN: false },
   { GRT: '더그래프', BT: true, BN: 'USDT' },
+  { BIOT: '바이오패스포트', BT: true, BN: false },
   { XNO: '제노토큰', BT: true, BN: false },
   { SNX: '신세틱스', BT: true, BN: 'USDT' },
   { LINA: '리니어파이낸스', BT: true, BN: false },
