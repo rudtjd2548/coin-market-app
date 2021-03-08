@@ -201,7 +201,6 @@ const coinNameV2 = [
   { CHR: '크로미아', BT: true, BN: 'USDT' },
   { MBL: '무비블록', BT: true, BN: 'USDT' },
   { MXC: '머신익스체인지코인', BT: true, BN: false },
-  { OGO: '오리고', BT: true, BN: false },
   { DVP: '디브이피', BT: true, BN: false },
   { FCT: '피르마체인', BT: true, BN: false },
   { FNB: '에프앤비프로토콜', BT: true, BN: false },
