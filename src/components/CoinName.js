@@ -262,7 +262,6 @@ const coinNameV2 = [
   { PIVX: '피벡스', BT: true, BN: 'ETH' },
   { GXC: '지엑스체인', BT: true, BN: false },
   { BTT: '비트토렌트', BT: true, BN: 'TRX' },
-  { HYC: '하이콘', BT: true, BN: false },
   { VSYS: '브이시스템즈', BT: true, BN: false },
   { IPX: '타키온프로토콜', BT: true, BN: false },
   { WICC: '웨이키체인', BT: true, BN: false },
