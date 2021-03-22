@@ -253,11 +253,13 @@ const coinNameV2 = [
   { WOZX: '이포스', BT: true, BN: false },
   { ANV: '애니버스', BT: true, BN: false },
   { GRT: '더그래프', BT: true, BN: 'USDT' },
+  { MM: '밀리미터토큰', BT: true, BN: false },
   { BIOT: '바이오패스포트', BT: true, BN: false },
   { XNO: '제노토큰', BT: true, BN: false },
   { SNX: '신세틱스', BT: true, BN: 'USDT' },
   { OXT: '오키드', BT: true, BN: 'USDT' },
   { LINA: '리니어파이낸스', BT: true, BN: false },
+  { SUSHI: '스시스왑', BT: true, BN: 'USDT' },
   { BCD: '비트코인 다이아몬드', BT: true, BN: 'BTC' },
   { XLM: '스텔라루멘', BT: true, BN: 'USDT' },
   { PIVX: '피벡스', BT: true, BN: 'ETH' },
@@ -282,6 +284,7 @@ const coinNameV2 = [
   { SSX: '썸씽', BT: true, BN: false },
   { BCHA: '비트코인 캐시 에이비씨', BT: true, BN: 'BUSD' },
   { TEMCO: '템코', BT: true, BN: false },
+  { BURGER: '버거스왑', BT: true, BN: 'BNB' },
 ];
 //ETH BUSD BIDR TRX BTC
 export { coinNameKR, coinNameV2 };
