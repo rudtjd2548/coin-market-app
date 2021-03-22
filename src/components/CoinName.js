@@ -183,7 +183,6 @@ const coinNameV2 = [
   { IOST: '이오스트', BT: true, BN: 'USDT' },
   { TMTG: '더마이다스터치골드', BT: true, BN: false },
   { QKC: '쿼크체인', BT: true, BN: 'BTC' },
-  { BZNT: '베잔트', BT: true, BN: false },
   { HDAC: '에이치닥', BT: true, BN: false },
   { NPXS: '펀디엑스', BT: true, BN: 'USDT' },
   { WET: '위쇼토큰', BT: true, BN: false },
