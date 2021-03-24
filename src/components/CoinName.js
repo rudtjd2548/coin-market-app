@@ -141,12 +141,10 @@ const coinNameKR = {
 const coinNameV2 = [
   { BTC: '비트코인', BT: true, BN: 'USDT' }, //i = 0
   { ETH: '이더리움', BT: true, BN: 'USDT' }, //i = 1
-  { DASH: '대시', BT: true, BN: 'USDT' },
   { LTC: '라이트코인', BT: true, BN: 'USDT' },
   { ETC: '이더리움 클래식', BT: true, BN: 'USDT' },
   { XRP: '리플', BT: true, BN: 'USDT' },
   { BCH: '비트코인캐시', BT: true, BN: 'USDT' },
-  { ZEC: '제트캐시', BT: true, BN: 'USDT' },
   { QTUM: '퀀텀', BT: true, BN: 'USDT' },
   { BTG: '비트코인 골드', BT: true, BN: 'BTC' },
   { EOS: '이오스', BT: true, BN: 'USDT' },
@@ -257,11 +255,10 @@ const coinNameV2 = [
   { XNO: '제노토큰', BT: true, BN: false },
   { SNX: '신세틱스', BT: true, BN: 'USDT' },
   { OXT: '오키드', BT: true, BN: 'USDT' },
-  { LINA: '리니어파이낸스', BT: true, BN: false },
+  { LINA: '리니어파이낸스', BT: true, BN: 'USDT' },
   { SUSHI: '스시스왑', BT: true, BN: 'USDT' },
   { BCD: '비트코인 다이아몬드', BT: true, BN: 'BTC' },
   { XLM: '스텔라루멘', BT: true, BN: 'USDT' },
-  { PIVX: '피벡스', BT: true, BN: 'ETH' },
   { GXC: '지엑스체인', BT: true, BN: false },
   { BTT: '비트토렌트', BT: true, BN: 'TRX' },
   { VSYS: '브이시스템즈', BT: true, BN: false },
